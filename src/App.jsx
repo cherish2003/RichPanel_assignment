@@ -1,14 +1,18 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { Home } from "./pages/Home";
+import { Route, Routes } from "react-router-dom";
+import { Integrationpage } from "./pages/Integrationpage";
+import { DisconnectPage } from "./pages/DisconnectPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <Routes>
+        <Route element={<Home />} path="/" />
+        <Route element={<Integrationpage />} path="/integrateuser" />
+        <Route element={<DisconnectPage />} path="/disconnectuser" />
+      </Routes>
     </>
   );
 }
