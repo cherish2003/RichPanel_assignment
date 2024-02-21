@@ -14,6 +14,12 @@ export const DisconnectPage = () => {
           >
             Reply to messages
           </button>
+          <button
+            type="submit"
+            className="bg-red-700 px-10 rounded-md py-2 text-white mt-4"
+          >
+            Disconnect User
+          </button>
         </div>
       </div>
     </div>

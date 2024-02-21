@@ -1,4 +1,3 @@
-
 .scrollBarRem::-webkit-scrollbar {
   display: none;
 }
@@ -7,4 +6,8 @@
   overflow-y: scroll;
   -ms-overflow-style: none; /* Internet Explorer and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.chatBoxheight {
+  height: calc(100% - 140px);
 }

@@ -91,7 +91,7 @@ export const Signup = ({ signupanimation, signupDisplay, login }) => {
                 className="text-darkBlue text-sm cursor-pointer"
                 onClick={login}
               >
-                Login in
+                Login
               </span>
             </div>
           </div>

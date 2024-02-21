@@ -4,6 +4,7 @@ import { Home } from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import { Integrationpage } from "./pages/Integrationpage";
 import { DisconnectPage } from "./pages/DisconnectPage";
+import { Agentpage } from "./pages/Agentpage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route element={<Home />} path="/" />
         <Route element={<Integrationpage />} path="/integrateuser" />
         <Route element={<DisconnectPage />} path="/disconnectuser" />
+        <Route element={<Agentpage />} path="/agentpage" />
       </Routes>
     </>
   );
