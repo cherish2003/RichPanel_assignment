@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 export const DisconnectPage = () => {
+  const navigate = useNavigate();
+  const { setTempToken } = useContext(UserContext);
+  const disconnectFromFacebook = () => {
+    setTempToken("");
+    navigate("/", { replace: true });
+  };
   return (
     <div className="h-screen flex justify-center items-center">
       <div className=" flex rounded-2xl  p-5 items-center bg-[#f0f6ff] ">
@@ -11,12 +19,16 @@ export const DisconnectPage = () => {
           <button
             type="submit"
             className="bg-darkBlue px-10 rounded-md py-2 text-white mt-4"
+            onClick={() => {
+              navigate("/agentpage", { replace: true });
+            }}
           >
             Reply to messages
           </button>
           <button
             type="submit"
             className="bg-red-700 px-10 rounded-md py-2 text-white mt-4"
+            onClick={disconnectFromFacebook}
           >
             Disconnect User
           </button>

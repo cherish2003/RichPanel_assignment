@@ -11,3 +11,6 @@
 .chatBoxheight {
   height: calc(100% - 140px);
 }
+.Reciever {
+  flex-direction: row-reverse;
+}

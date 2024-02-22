@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase/FirebaseConfig";
 
 export const Signup = ({ signupanimation, signupDisplay, login }) => {
+  auth;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setIsRegistering(true);
+    try {
+      const usr = await createUserWithEmailAndPassword(auth, email, password);
+      alert("Register successfull");
+      login();
+    } catch (error) {
+      alert("Username Already exists");
+    }
+  };
+
   return (
     <div
       className={`h-4/5  ${
@@ -37,7 +56,7 @@ export const Signup = ({ signupanimation, signupDisplay, login }) => {
               Sign up
             </h2>
 
-            <form className="flex flex-col gap-4 mt-5">
+            <form className="flex flex-col gap-4 mt-5" autoComplete="off">
               <div className=" flex flex-col  mt-1 w-full">
                 <label
                   for="username"
@@ -49,7 +68,9 @@ export const Signup = ({ signupanimation, signupDisplay, login }) => {
                   className="p-2 rounded-md border"
                   type="text"
                   name="username"
-                  placeholder="Email"
+                  // onChange={(}
+                  // value={username}
+                  placeholder="Username"
                 />
                 <label
                   for="email"
@@ -61,6 +82,10 @@ export const Signup = ({ signupanimation, signupDisplay, login }) => {
                   className="p-2 rounded-md border"
                   type="email"
                   name="email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  value={email}
                   placeholder="Email"
                 />
               </div>
@@ -76,12 +101,19 @@ export const Signup = ({ signupanimation, signupDisplay, login }) => {
                   <input
                     className="p-2 rounded-md border w-full mt-2"
                     name="password"
+                    value={password}
                     placeholder="Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                   />
                 </div>
               </div>
-              <button className=" bg-darkBlue text-white rounded-lg border-2 border-white px-6 py-3 font-semibold ">
-                Login
+              <button
+                className=" bg-darkBlue text-white rounded-lg border-2 border-white px-6 py-3 font-semibold "
+                onClick={onSubmit}
+              >
+                Sign up
               </button>
             </form>
 

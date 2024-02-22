@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase/FirebaseConfig";
 export const Login = ({ loginDisplay, loginanimation, signup }) => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isSigninIn, setIsSigninIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (!isSigninIn) {
+      setIsSigninIn(true);
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate("/integrateuser", { replace: true });
+        alert("Login successfull");
+      } catch (error) {
+        alert("Enter a valid passoword/email");
+        console.log(errorMessage);
+      }
+    }
+  };
   return (
     <div
       className={`h-4/5  ${
@@ -49,7 +74,11 @@ export const Login = ({ loginDisplay, loginanimation, signup }) => {
                   className="p-2 rounded-md border"
                   type="email"
                   name="email"
+                  value={email}
                   placeholder="Email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                 />
               </div>
               <div>
@@ -63,11 +92,18 @@ export const Login = ({ loginDisplay, loginanimation, signup }) => {
                   <input
                     className="p-2 rounded-md border w-full mt-2"
                     name="password"
+                    value={password}
                     placeholder="Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                   />
                 </div>
               </div>
-              <button className=" bg-darkBlue text-white rounded-lg border-2 border-white px-6 py-3 font-semibold ">
+              <button
+                className=" bg-darkBlue text-white rounded-lg border-2 border-white px-6 py-3 font-semibold "
+                onClick={onSubmit}
+              >
                 Login
               </button>
             </form>
